@@ -33,9 +33,12 @@ let miniBufExplMaxSize = 100
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplCloseOnSelect = 1
 let g:miniBufExplUseSingleClick = 1
+let g:snips_author = "Jake Edstrom <jacob.edstrom@nerdery.com>"
 let NERDTreeShowHidden = 1
 let NERDTreeChDirMode = 2
-let NERDTreeIgnore = ['\.$', '\.\.$', '\~$']
+let NERDTreeIgnore = [ '\~$', '^\.$', '^\.\.$', '^\.git$' ]
+let g:pdv_cfg_Author = "Jake Edstrom <jacob.edstrom@nerdery.com>"
+let g:pdv_cfg_Uses = 0
 "let g:UltiSnipsUsePythonVersion = 2
 "let g:UltiSnipsSnippetDirectories = [ "UltiSnips/UltiSnips" ]
 let g:UltiSnipsEditSplit = 'vertical'
@@ -52,12 +55,16 @@ nnoremap k gk
 "=====================
 
 function! MyCommentLine()
-  call setline(".", substitute(getline("."), '^\(\s*\)\(\S\)', '\1\/\/\2', ''))
+  call setline(".", substitute(getline("."), '^\(\s*\)\(\S\)', '\1\/\/ \2', ''))
 endfunction
 
 function! MyUncommentLine()
-  call setline(".", substitute(getline("."), '^\(\s*\)\/\/\(\S\)', '\1\2', ''))
+  call setline(".", substitute(getline("."), '^\(\s*\)\/\/ \?\(\S\)', '\1\2', ''))
 endfunction
+
+"=====================
+" end custom functions
+"=====================
 
 nmap <silent> <Leader>b :TMiniBufExplorer<cr>
 map <silent> <right> :TMiniBufExplorer<cr>
@@ -83,8 +90,6 @@ nnoremap <silent> <M-F7> :set list<cr>
 nnoremap <silent> <F9> :NERDTreeToggle<cr>
 nnoremap <M-F9> :NERDTree 
 map <silent> <left> :NERDTreeToggle<cr>
-map <silent> <M-up> :bp<cr>
-map <silent> <M-down> :bn<cr>
 nmap <silent> <F10> :set nowrap<cr>
 nmap <silent> <M-F10> :set wrap<cr>
 nmap <silent> <F11> :noh<cr>
@@ -100,6 +105,8 @@ nmap <silent> <C-up> :wincmd k<cr>
 nmap <silent> <C-down> :wincmd j<cr>
 nmap <silent> <M-left> :bp<cr>
 nmap <silent> <M-right> :bn<cr>
+map <silent> <M-up> :bp<cr>
+map <silent> <M-down> :bn<cr>
 noremap <S-space> <C-b>
 noremap <space> <C-f>
 
