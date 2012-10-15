@@ -123,8 +123,8 @@ if has('win32')
   map <C-Z> <C-L>
   nmap <C-Z> <C-L>
   imap <C-Z> <C-L>
-  set directory=c:\\Users\Jake\temp
-  "set backup
+  set directory=.,$TEMP
+  set nobackup
   "set backupdir=C:\Documents\ and\ Settings\jedstr001\My\ Documents\Vim\ backup
   "au BufWritePre * let &backupext = '-' . strftime('%Y%m%d-%H%M%S') . '~'
 else
