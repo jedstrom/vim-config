@@ -36,7 +36,7 @@ let g:miniBufExplUseSingleClick = 1
 let g:snips_author = "Jake Edstrom <jacob.edstrom@nerdery.com>"
 let NERDTreeShowHidden = 1
 let NERDTreeChDirMode = 2
-let NERDTreeIgnore = [ '\~$', '^\.$', '^\.\.$', '^\.git$' ]
+let NERDTreeIgnore = [ '\~$', '^\.$', '^\.\.$', '^\.git$', '\.swp$' ]
 let g:pdv_cfg_Author = "Jake Edstrom <jacob.edstrom@nerdery.com>"
 let g:pdv_cfg_Uses = 0
 "let g:UltiSnipsUsePythonVersion = 2
@@ -123,7 +123,7 @@ if has('win32')
   map <C-Z> <C-L>
   nmap <C-Z> <C-L>
   imap <C-Z> <C-L>
-  set directory=.,$TEMP
+  set directory=~/temp
   set nobackup
   "set backupdir=C:\Documents\ and\ Settings\jedstr001\My\ Documents\Vim\ backup
   "au BufWritePre * let &backupext = '-' . strftime('%Y%m%d-%H%M%S') . '~'

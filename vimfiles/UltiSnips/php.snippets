@@ -20,7 +20,7 @@ snippet doc_f "doc_f"
  * $2
  * @return ${4:void}
  * @author ${5:`!v g:snips_author`}
- **/
+ */
 ${1:public }function ${2:someFunc}(${3})
 {${6}
 }
@@ -31,10 +31,39 @@ snippet doc_i "doc_i"
  * $1
  * @package ${2:default}
  * @author ${3:`!v g:snips_author`}
- **/
+ */
 interface ${1:someClass}
 {${4}
 } // END interface $1"
+endsnippet
+
+snippet doc_fp "DocBlock for existing function/method" b
+/**
+ * ${1:Method description}
+ *
+ * @return ${2:void}
+ * @author ${3:`!v g:snips_author`}
+ */$0
+endsnippet
+
+snippet doc_pp "DocBlock for existing class property" b
+/**
+ * ${1:Property description}
+ *
+ * @var ${2:type}
+ */
+endsnippet
+
+snippet doc_cp "DocBlock for existing class" b
+/**
+ * ${1:Class description}
+ *
+ * @author ${3:`!v g:snips_author`}
+ */
+endsnippet
+
+snippet @par "DocBlock @param tag"
+@param ${1:type} $${2:name} ${3:description}
 endsnippet
 
 snippet for "for"
@@ -119,21 +148,23 @@ endsnippet
 snippet gs "PHP Class Getter Setter" !b
 protected $${1:_property};
 
-/*
- * Getter for $1
+/**
+ * Getter for $1 property
  */
 public function get${1/_?([a-z0-9]+)/\u$1/i}()
 {
     return $this->$1;$2
 }
 
-/*
- * Setter for $1
+/**
+ * Setter for $1 property
+ *
+ * @param ${3:type} $${1/_?([a-z0-9]+)/$1/i} ${4:property description}
  */
 public function set${1/_?([a-z0-9]+)/\u$1/i}($${1/_?([a-z0-9]+)/$1/i})
 {
-    $this->$1 = $${1/_?([a-z0-9]+)/$1/i};$3
-    ${4:return $this;}
+    $this->$1 = $${1/_?([a-z0-9]+)/$1/i};$5
+    ${6:return $this;}
 }
 $0
 endsnippet
@@ -142,8 +173,11 @@ snippet pub "Public function" !b
 public function ${1:name}(${2:$param})
 {
     ${VISUAL}${3:return null;}
-}
-$0
+}$0
+endsnippet
+
+snippet prop "Class property" !b
+${1:protected} $`!p snip.rv = '_' if t[1] == 'protected' else ''`${2:name}${3: = ${4:value}};$0
 endsnippet
 
 snippet pro "Protected function" !b
@@ -218,7 +252,7 @@ $0
 endsnippet
 
 
-snippet class "Class declaration template" !b
+snippet classr "Class declaration template" !b
 /**
  * Class ${1:`!p snip.rv=snip.fn.capitalize().split('.')[0]`}
  * @author $2
@@ -252,6 +286,33 @@ public function $1Action($2)
     $3
     return ${4:array();}$0
 }
+endsnippet
+
+snippet zt "Zend_Db_Table" !b
+class ${1:Table_Name} extends Zend_Db_Table
+{
+    protected $_name = '${2:table_name}';
+    protected $_primary = '${3:id}';
+    protected $_sequence = ${4:true};$0
+}
+endsnippet
+
+snippet ztr "Zend_Db_Table_Row" !b
+class ${1:Table_Row_Name} extends Zend_Db_Table_Row_Abstract
+{
+}$0
+endsnippet
+
+snippet ztrme "Zend Table referenceMap entry"
+'${1:ReferenceName}' => array(
+    'columns' => '${2:colName}',
+    'refTableClass' => '${3:tableClassName}',
+    'refColumns' => '${4:refColName}'
+),$0
+endsnippet
+
+snippet todo "TODO" !b
+// TODO: ${1:todo stuff}
 endsnippet
 
 # :vim:ft=snippets:
