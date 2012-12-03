@@ -9,6 +9,10 @@ snippet def "def"
 define('${1:CONST}', ${2:value});${3}
 endsnippet
 
+snippet const "Class constant" !b
+const ${1:CONSTANT_NAME} = ${2:'${3:value}'};
+endsnippet
+
 snippet do "do"
 do {
 	${2:// code... }
@@ -54,6 +58,10 @@ snippet doc_pp "DocBlock for existing class property" b
  */
 endsnippet
 
+snippet doc_v "Class property" !b
+/** @var ${1:type} */$0
+endsnippet
+
 snippet doc_cp "DocBlock for existing class" b
 /**
  * ${1:Class description}
@@ -64,6 +72,10 @@ endsnippet
 
 snippet @par "DocBlock @param tag"
 @param ${1:type} $${2:name} ${3:description}
+endsnippet
+
+snippet @auth "Author"
+@author ${1:`!v g:snips_author`}
 endsnippet
 
 snippet for "for"
@@ -146,25 +158,28 @@ $0
 endsnippet
 
 snippet gs "PHP Class Getter Setter" !b
-protected $${1:_property};
+protected${1: static} $${2:_property} = ${3:value};
 
 /**
- * Getter for $1 property
+ * Getter for $2 property
+ *
+ * @return $5
  */
-public function get${1/_?([a-z0-9]+)/\u$1/i}()
+public$1 function get${2/_?([a-z0-9]+)/\u$1/i}()
 {
-    return $this->$1;$2
+    return `!p snip.rv = 'self::$' if t[1] == ' static' else '$this->'`$2;$4
 }
 
 /**
- * Setter for $1 property
+ * Setter for $2 property
  *
- * @param ${3:type} $${1/_?([a-z0-9]+)/$1/i} ${4:property description}
+ * @param ${5:type} $${2/_?([a-z0-9]+)/$1/i} ${6:property description}
+ * @return void
  */
-public function set${1/_?([a-z0-9]+)/\u$1/i}($${1/_?([a-z0-9]+)/$1/i})
+public$1 function set${2/_?([a-z0-9]+)/\u$1/i}($${2/_?([a-z0-9]+)/$1/i})
 {
-    $this->$1 = $${1/_?([a-z0-9]+)/$1/i};$5
-    ${6:return $this;}
+    `!p snip.rv = 'self::$' if t[1] == ' static' else '$this->'`$2 = $${2/_?([a-z0-9]+)/$1/i};$7
+    ${8:return $this;}
 }
 $0
 endsnippet
@@ -177,7 +192,7 @@ public function ${1:name}(${2:$param})
 endsnippet
 
 snippet prop "Class property" !b
-${1:protected} $`!p snip.rv = '_' if t[1] == 'protected' else ''`${2:name}${3: = ${4:value}};$0
+${1:protected}${2: static} $`!p snip.rv = '_' if t[1] == 'protected' else ''`${3:name}${4: = ${5:value}};$0
 endsnippet
 
 snippet pro "Protected function" !b
@@ -288,6 +303,21 @@ public function $1Action($2)
 }
 endsnippet
 
+# Zend Framework related
+
+snippet zca "Zend Action Controller" !b
+class ${1:Namespace}_${2:ControllerName}Controller extends Zend_Controller_Action
+{
+    public function init()
+    {
+    }
+
+    public function ${3:index}Action()
+    {
+    }
+}$0
+endsnippet
+
 snippet zt "Zend_Db_Table" !b
 class ${1:Table_Name} extends Zend_Db_Table
 {
@@ -313,6 +343,38 @@ endsnippet
 
 snippet todo "TODO" !b
 // TODO: ${1:todo stuff}
+endsnippet
+
+snippet zdbg "Zend Debug"
+Zend_Debug::dump(${1});
+endsnippet
+
+snippet /** "Comment block" !b
+/**
+ * $0
+ */
+endsnippet
+
+snippet zfva "Zend Form Element validators" !b
+'validators' => array(
+    '${1:name}' => array(
+        'validator' => '${2:name}',$0
+    ),
+),
+endsnippet
+
+snippet zfve "Zend Form Element validators entry" !b
+'${1:name}' => array(
+    'validator' => '${2:name}',$0
+),
+endsnippet
+
+snippet zfvo "Zend Form Element validators options" !b
+'options' => array(
+    ${1:'messages' => array(
+        ${2:'${3:messageName}'} => '${4:message text}',
+    ),}
+),
 endsnippet
 
 # :vim:ft=snippets:

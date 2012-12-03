@@ -77,4 +77,64 @@ snippet iife "Immediately invoked function expression"
 }(${4:outerArg}));
 endsnippet
 
+snippet doc_file "File doc block" !b
+/**
+ * @fileOverview  ${1:File description}
+ *
+ * @author ${2:`!v g:snips_author`}
+ * @version ${3:1.0}
+ */
+endsnippet
+
+snippet doc_cp "Class" !b
+/**
+ * ${1:Class description}
+ *
+ * @class
+ * @author ${2:`!v g:snips_author`}
+ */
+endsnippet
+
+snippet doc_mp "Method" !b
+/**
+ * ${1:Method description}
+ *
+ * @author ${2:`!v g:snips_author`}
+ * @public
+ */
+endsnippet
+
+snippet @con "Constructor"
+@constructor
+endsnippet
+
+snippet @par "Param"
+@param ${1:paramType} ${2:paramName} ${3:param description}
+endsnippet
+
+snippet @paro "Optional Param"
+@param ${1:paramType} [${2:paramName}] ${3:param description}
+endsnippet
+
+snippet doc_pp "Property" !b
+/**
+ * ${1:Property description}
+ *
+ * @type ${2:type}
+ */
+endsnippet
+
+snippet reqmod "RequireJS Module" !b
+define(
+    [
+        ${1:'${2:dependency}',}${3:}
+    ],
+    function (
+        ${4:$2}
+    ) {${5}
+    }$0
+);
+endsnippet
+
+
 # vim:ft=snippets:
