@@ -34,6 +34,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplCloseOnSelect = 1
 let g:miniBufExplUseSingleClick = 1
 let g:snips_author = "Jake Edstrom <jedstrom@nerdery.com>"
+let g:snips_base_package = "PopDustStyle"
 let NERDTreeShowHidden = 1
 let NERDTreeChDirMode = 2
 let NERDTreeIgnore = [ '\~$', '^\.$', '^\.\.$', '^\.git$', '\.swp$' ]
